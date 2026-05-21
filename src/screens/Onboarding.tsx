@@ -11,7 +11,7 @@ const Onboarding = () => {
       <Image source={require("../../assets/onboarding.png")} resizeMode="cover" style={styles.backgroundImage}/>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.replace("Login")}>
           <View style={styles.buttonContent}>
             <Text style={styles.buttonText}>Get Started</Text>
             <Svg viewBox="0 0 24 24" fill="none" width={35} height={35} stroke="#ffffff">

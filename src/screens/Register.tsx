@@ -16,6 +16,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
+import { Alert } from 'react-native';
 
 const { height } = Dimensions.get('window');
 
@@ -27,6 +29,22 @@ const Register = () => {
   const { colors, theme } = useTheme();
 
   const navigation = useNavigation();
+  const { register } = useAuth();
+
+  const handleRegister = async () => {
+    if (!name || !email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+    const success = await register(name, email, password);
+    if (success) {
+      Alert.alert('Success', 'Registration successful! Please login.');
+      // @ts-ignore
+      navigation.navigate("Login");
+    } else {
+      Alert.alert('Error', 'Registration failed. Please try again.');
+    }
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -104,8 +122,7 @@ const Register = () => {
                 
             <TouchableOpacity 
               style={[styles.registerButton, { backgroundColor: colors.primary, shadowColor: colors.primary }]} 
-              // @ts-ignore
-              onPress={() => navigation.goBack()}
+              onPress={handleRegister}
             >
               <Text style={styles.registerButtonText}>Sign Up</Text>
             </TouchableOpacity>

@@ -10,7 +10,8 @@ import {
   StyleSheet, 
   KeyboardAvoidingView, 
   Platform, 
-  ScrollView 
+  ScrollView,
+  Alert
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react-native';
@@ -28,6 +29,17 @@ const Login = () => {
   const { signIn } = useAuth();
 
   const navigation = useNavigation();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+    const success = await signIn(email, password);
+    if (!success) {
+      Alert.alert('Error', 'Invalid email or password, or user not registered.');
+    }
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -95,7 +107,7 @@ const Login = () => {
               <Text style={[styles.forgotPasswordText, { color: colors.primary }]}>Forgot Password?</Text>
             </TouchableOpacity>
                 
-            <TouchableOpacity style={[styles.loginButton, { backgroundColor: colors.primary, shadowColor: colors.primary }]} onPress={signIn}>
+            <TouchableOpacity style={[styles.loginButton, { backgroundColor: colors.primary, shadowColor: colors.primary }]} onPress={handleLogin}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 

@@ -40,7 +40,7 @@ type SearchScreenNavigationProp = StackNavigationProp<
 >;
 
 interface SearchScreenProps {
-  navigation: SearchScreenNavigationProp;
+  navigation: any;
 }
 
 const RESTAURANT_DATA: RestaurantItem[] = [
@@ -183,10 +183,13 @@ export default function SearchScreen({ navigation }: SearchScreenProps) {
 
   const handleSelectRestaurant = (restaurant: RestaurantItem): void => {
     if (searchQuery.trim().length > 0) addToHistory(searchQuery);
-    navigation.navigate("RestaurantDetails", {
-      restaurantId: restaurant.id,
-      name: restaurant.name,
-      price: restaurant.price,
+    navigation.navigate("HomeTab", {
+      screen: "RestaurantDetails",
+      params: {
+        restaurantId: restaurant.id,
+        name: restaurant.name,
+        price: restaurant.price,
+      }
     });
   };
 

@@ -1,50 +1,78 @@
-# Welcome to your Expo app 👋
+# Food Delivery App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive Food Delivery mobile application built with React Native and Expo, showcasing advanced navigation architectures, a robust design system, and persistent authentication.
 
-## Get started
+## 🚀 Navigation Architecture
 
-1. Install dependencies
+The application uses nested navigators to provide a fluid, standard mobile app experience. We utilize Stack, Drawer, and Bottom Tab navigators from `react-navigation`.
 
+```mermaid
+graph TD
+    Root([Navigation Container]) --> AuthCheck{Is Authenticated?}
+    
+    %% Unauthenticated Flow
+    AuthCheck -- No --> AuthStack
+    AuthStack --> Onboarding(Onboarding Screen)
+    AuthStack --> Login(Login Screen)
+    AuthStack --> Register(Register Screen)
+    
+    %% Authenticated Flow
+    AuthCheck -- Yes --> AppStack
+    AppStack --> DrawerNav[Drawer Navigator]
+    
+    %% Drawer Items
+    DrawerNav --> MainTabs[Bottom Tabs Navigator]
+    DrawerNav --> OrdersDrawer(Orders Screen)
+    DrawerNav --> Settings(Settings Screen)
+    DrawerNav --> Help(Help Screen)
+    DrawerNav --> Logout(Logout Flow)
+    
+    %% Bottom Tabs
+    MainTabs --> HomeTab[Home Stack]
+    MainTabs --> SearchTab(Search Screen)
+    MainTabs --> OrdersTab(Orders Screen)
+    MainTabs --> ProfileTab(Profile Screen)
+    
+    %% Home Stack
+    HomeTab --> Home(Home Screen)
+    HomeTab --> RestaurantDetails(Restaurant Details)
+```
+
+## 🔗 Deep Linking
+
+The app supports deep linking using the `foodapp://` and `fooddeliveryapp://` schemes.
+
+**Supported Routes:**
+- `foodapp://home` - Navigate directly to the Home screen
+- `foodapp://restaurant/123` - Navigate directly to a specific restaurant's details page
+- `foodapp://orders` - Navigate directly to the orders screen
+
+To test deep linking in the simulator, you can run:
+```bash
+npx uri-scheme open foodapp://restaurant/123 --ios
+```
+
+## 📦 Project Setup
+
+1. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. **Run the Expo development server:**
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. **Open the app:**
+   - Scan the QR code with the Expo Go app on your physical device.
+   - Or press `a` to open in the Android emulator.
+   - Or press `i` to open in the iOS simulator.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## ✨ Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **Nested Navigation:** Complex but seamless routing using React Navigation (Stack, Drawer, Tabs).
+- **Persistent Authentication:** Uses `AsyncStorage` to maintain user session state across app reloads.
+- **Programmatic Navigation:** Implements `navigate`, `goBack`, `replace`, and `reset` methods for precise flow control.
+- **Dynamic Theming:** Built-in Light and Dark modes.
+- **Cart & Orders Context:** Centralized state management for a fully functional shopping cart.

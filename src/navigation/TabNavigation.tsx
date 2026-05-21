@@ -4,9 +4,22 @@ import Home from '../screens/Home';
 import Profile from '../screens/Profile';   
 import Orders from '../screens/Orders';   
 import Search from '../screens/Search'; 
+import ResturantDetails from '../screens/ResturantDetails';
 import { useOrders } from '../context/OrderContext';
 import { useTheme } from '../context/ThemeContext';
 import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="RestaurantDetails" component={ResturantDetails} />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +41,8 @@ export default function TabNavigation() {
       }}
     >
       <Tab.Screen 
-        name="Home" 
-        component={Home} 
+        name="HomeTab" 
+        component={HomeStack} 
         options={{
           title: "Home", 
           tabBarIcon: ({focused, color}) => (

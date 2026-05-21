@@ -9,12 +9,14 @@ import Logout from '../screens/Logout';
 import Help from '../screens/Help';
 import TabNavigation from './TabNavigation';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 const Drawer = createDrawerNavigator();
 const { width } = Dimensions.get('window');
 
 function CustomDrawerContent(props: any) {
   const { theme, toggleTheme, colors } = useTheme();
+  const { user } = useAuth();
 
   return (
     <View style={[styles.drawerContainer, { backgroundColor: colors.background }]}>
@@ -25,7 +27,7 @@ function CustomDrawerContent(props: any) {
             style={styles.avatarImage}
           />
           <View style={styles.profileMetaWrapper}>
-            <Text style={[styles.userNameText, { color: colors.text }]} numberOfLines={1}>Guest User</Text>
+            <Text style={[styles.userNameText, { color: colors.text }]} numberOfLines={1}>{user?.name || 'Guest User'}</Text>
             <Text style={[styles.userSubtitleText, { color: colors.textSecondary }]} numberOfLines={1}>Premium Member</Text>
           </View>
         </View>
@@ -97,7 +99,7 @@ function MyDrawer() {
       }}
     >
       <Drawer.Screen 
-        name="Home" 
+        name="MainTabs" 
         component={TabNavigation} 
         options={{ 
           title: 'Home',

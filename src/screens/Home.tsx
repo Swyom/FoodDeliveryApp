@@ -333,10 +333,13 @@ const Home = ({ navigation }: any) => {
               discount={restaurant.discount}
               isAvailable={restaurant.isAvailable}
               onPress={() => {
-                navigation.navigate('RestaurantDetails', { 
-                  restaurantId: restaurant.id,
-                  name: restaurant.name,
-                  price: restaurant.price
+                navigation.navigate('HomeTab', {
+                  screen: 'RestaurantDetails',
+                  params: {
+                    restaurantId: restaurant.id,
+                    name: restaurant.name,
+                    price: restaurant.price
+                  }
                 });
               }}
             />

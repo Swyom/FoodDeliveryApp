@@ -37,10 +37,8 @@ const RootNavigator = () => {
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
         </>
       ) : (
-        // Authenticated users see main app
         <>
-          <Stack.Screen name="Home" component={DrawerNavigation} options={{ headerShown: false }} />
-          <Stack.Screen name="RestaurantDetails" component={ResturantDetails} options={{ headerShown: false }} />
+          <Stack.Screen name="DrawerRoot" component={DrawerNavigation} options={{ headerShown: false }} />
           <Stack.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
         </>
       )}
@@ -48,12 +46,37 @@ const RootNavigator = () => {
   );
 };
 
+
+
+const linking = {
+  prefixes: ['foodapp://', 'fooddeliveryapp://'],
+  config: {
+    screens: {
+      DrawerRoot: {
+        screens: {
+          MainTabs: {
+            screens: {
+              HomeTab: {
+                screens: {
+                  Home: 'home',
+                  RestaurantDetails: 'restaurant/:restaurantId',
+                }
+              },
+              Orders: 'orders'
+            }
+          }
+        }
+      }
+    },
+  },
+} as any;
+
 const App = () => {
   return (
     <ThemeProvider>
       <AuthProvider>
         <OrderProvider>
-          <NavigationContainer>
+          <NavigationContainer linking={linking}>
             <RootNavigator />
           </NavigationContainer>
         </OrderProvider>

@@ -32,7 +32,7 @@ const Logout = () => {
         <TouchableOpacity
           style={[styles.cancelBtn, { borderColor: colors.border }]}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.reset({ index: 0, routes: [{ name: 'MainTabs' }] })}
         >
           <Text style={[styles.cancelText, { color: colors.text }]}>Cancel</Text>
         </TouchableOpacity>

@@ -10,22 +10,24 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
+  const { user } = useAuth();
 
   const minimalMenuItems = [
     {
       icon: "person-outline",
       label: "User Name",
-      value: "Guest User",
+      value: user?.name || "Guest User",
       action: "",
     },
     {
       icon: "mail-outline",
       label: "Email ID",
-      value: "guest.user@spicedelivery.com",
+      value: user?.email || "guest.user@spicedelivery.com",
       action: "",
     },
     {
