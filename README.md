@@ -1,3 +1,4 @@
+[Screencast from 2026-05-21 22-13-39.webm](https://github.com/user-attachments/assets/40d86775-fd8a-412e-96e6-f1b68715cc5d)
 # Food Delivery App
 
 A comprehensive Food Delivery mobile application built with React Native and Expo, showcasing advanced navigation architectures, a robust design system, and persistent authentication.
@@ -76,3 +77,10 @@ npx uri-scheme open foodapp://restaurant/123 --ios
 - **Programmatic Navigation:** Implements `navigate`, `goBack`, `replace`, and `reset` methods for precise flow control.
 - **Dynamic Theming:** Built-in Light and Dark modes.
 - **Cart & Orders Context:** Centralized state management for a fully functional shopping cart.
+
+## Demo video
+[Screencast from 2026-05-21 22-13-39.webm](https://github.com/user-attachments/assets/b3a4a2da-fd88-4df5-bfe9-bffc94b80c10)
+
+
+
+  
