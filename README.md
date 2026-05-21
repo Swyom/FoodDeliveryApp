@@ -1,4 +1,3 @@
-[Screencast from 2026-05-21 22-13-39.webm](https://github.com/user-attachments/assets/40d86775-fd8a-412e-96e6-f1b68715cc5d)
 # Food Delivery App
 
 A comprehensive Food Delivery mobile application built with React Native and Expo, showcasing advanced navigation architectures, a robust design system, and persistent authentication.
